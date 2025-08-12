@@ -1,0 +1,17 @@
+CROSS_COMPILE ?= aarch64-none-linux-gnu-
+CC = $(CROSS_COMPILE)gcc
+CFLAGS = -Wall -Wextra -std=c99
+INCLUDES = 
+LDFLAGS = 
+
+SRC := writer.c
+TARGET = writer
+OBJS := $(SRC:.c=.o)
+
+all: $(TARGET)
+
+$(TARGET) : $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(TARGET) $(LDFLAGS)
+
+clean:
+	-rm -f *.o $(TARGET) *.elf *.map
