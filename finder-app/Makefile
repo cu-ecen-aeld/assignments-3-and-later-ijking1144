@@ -1,4 +1,4 @@
-CROSS_COMPILE ?= aarch64-none-linux-gnu-
+CROSS_COMPILE ?=
 CC = $(CROSS_COMPILE)gcc
 CFLAGS = -Wall -Wextra -std=c99
 INCLUDES = 
