@@ -18,8 +18,13 @@ bool do_system(const char *cmd)
 */
 	int success=system(cmd);
 
-
-    return success;
+	if(success!=-1){
+		return true;
+	}
+	else{
+		return false;
+	}
+    
 }
 
 /**
@@ -60,21 +65,28 @@ bool do_exec(int count, ...)
  *   as second argument to the execv() command.
  *
 */
+	if (command[0][0]!='/'){
+		return 0;
+	}
+	int status;
 	pid_t pid= fork();
 	if(pid==-1){
-		return -1;
+		return 0;
 	}
 	else if(pid==0){
 		execv(command[0], command);
+		exit(1);
+
 	}
 	else{
-		int status;
 		wait(&status);
 	}
 
-    va_end(args);
-
-    return true;
+        if (status == 0) {
+    		return true;
+	} else {
+    		return false;
+	}
 }
 
 /**
