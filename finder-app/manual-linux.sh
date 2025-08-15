@@ -63,6 +63,7 @@ cd ${OUTDIR}/rootfs
 mkdir -p bin dev etc home lib lib64 proc sbin sys tmp usr var
 mkdir -p usr/bin usr/lib usr/sbin
 mkdir -p var/log
+mkdir -p home/conf
 
 cd "$OUTDIR"
 if [ ! -d "${OUTDIR}/busybox" ]
@@ -89,7 +90,7 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 cd ${OUTDIR}
 
 # TODO: Add library dependencies to rootfs
-
+cp /home/ted/finder-app/conf ${OUTDIR}/rootfs/home/conf
 SYSROOT=$(${CROSS_COMPILE}gcc --print-sysroot)
 find ${SYSROOT} -name "ld-linux-aarch64.so.1" -exec cp -a {} ${OUTDIR}/rootfs/lib/ \;
 find ${SYSROOT} -name "libm.so.6" -exec cp -a {} ${OUTDIR}/rootfs/lib64/ \;
