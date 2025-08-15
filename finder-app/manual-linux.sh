@@ -89,11 +89,12 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 cd ${OUTDIR}
 
 # TODO: Add library dependencies to rootfs
-TOOLCHAIN=/home/ted/XCompile/arm-gnu-toolchain-13.3.rel1-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu
-cp -a "$TOOLCHAIN/libc/lib/ld-linux-aarch64.so.1" ${OUTDIR}/rootfs/lib/
-cp -a $TOOLCHAIN/libc/lib64/libm.so.6 ${OUTDIR}/rootfs/lib64/
-cp -a $TOOLCHAIN/libc/lib64/libresolv.so.2 ${OUTDIR}/rootfs/lib64/
-cp -a $TOOLCHAIN/libc/lib64/libc.so.6 ${OUTDIR}/rootfs/lib64/
+
+SYSROOT=$(${CROSS_COMPILE}gcc --print-sysroot)
+find ${SYSROOT} -name "ld-linux-aarch64.so.1" -exec cp -a {} ${OUTDIR}/rootfs/lib/ \;
+find ${SYSROOT} -name "libm.so.6" -exec cp -a {} ${OUTDIR}/rootfs/lib64/ \;
+find ${SYSROOT} -name "libresolv.so.2" -exec cp -a {} ${OUTDIR}/rootfs/lib64/ \;
+find ${SYSROOT} -name "libc.so.6" -exec cp -a {} ${OUTDIR}/rootfs/lib64/ \;
 
 # TODO: Make device nodes
 cd ${OUTDIR}/rootfs
