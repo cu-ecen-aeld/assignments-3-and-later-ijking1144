@@ -99,14 +99,6 @@ find ${SYSROOT} -name "ld-linux-aarch64.so.1" -exec cp -a {} ${OUTDIR}/rootfs/li
 find ${SYSROOT} -name "libm.so.6" -exec cp -a {} ${OUTDIR}/rootfs/lib64/ \;
 find ${SYSROOT} -name "libresolv.so.2" -exec cp -a {} ${OUTDIR}/rootfs/lib64/ \;
 find ${SYSROOT} -name "libc.so.6" -exec cp -a {} ${OUTDIR}/rootfs/lib64/ \;
-cp ${FINDER_APP_DIR}/finder-test.sh ${OUTDIR}/rootfs/home
-cp ${FINDER_APP_DIR}/writer ${OUTDIR}/rootfs/home
-cp ${FINDER_APP_DIR}/finder.sh ${OUTDIR}/rootfs/home
-cp ${FINDER_APP_DIR}/autorun-qemu.sh ${OUTDIR}/rootfs/home
-chmod +x ${OUTDIR}/rootfs/home/finder-test.sh
-chmod +x ${OUTDIR}/rootfs/home/finder.sh
-chmod +x ${OUTDIR}/rootfs/home/autorun-qemu.sh
-chmod +x ${OUTDIR}/rootfs/home/writer
 
 # TODO: Make device nodes
 cd ${OUTDIR}/rootfs
@@ -124,10 +116,14 @@ make CROSS_COMPILE=${CROSS_COMPILE}
 # TODO: Copy the finder related scripts and executables to the /home directory
 # on the target rootfs
 
-cp finder-test.sh ${OUTDIR}/rootfs/home
-cp writer ${OUTDIR}/rootfs/home
-cp finder.sh ${OUTDIR}/rootfs/home
-cp autorun-qemu.sh ${OUTDIR}/rootfs/home
+cp ${FINDER_APP_DIR}/finder-test.sh ${OUTDIR}/rootfs/home
+cp ${FINDER_APP_DIR}/writer ${OUTDIR}/rootfs/home
+cp ${FINDER_APP_DIR}/finder.sh ${OUTDIR}/rootfs/home
+cp ${FINDER_APP_DIR}/autorun-qemu.sh ${OUTDIR}/rootfs/home
+chmod +x ${OUTDIR}/rootfs/home/finder-test.sh
+chmod +x ${OUTDIR}/rootfs/home/finder.sh
+chmod +x ${OUTDIR}/rootfs/home/autorun-qemu.sh
+chmod +x ${OUTDIR}/rootfs/home/writer
 
 # TODO: Chown the root directory
 
