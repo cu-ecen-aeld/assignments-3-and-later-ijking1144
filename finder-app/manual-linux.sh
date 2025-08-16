@@ -63,6 +63,7 @@ cd ${OUTDIR}/rootfs
 mkdir -p bin dev etc home lib lib64 proc sbin sys tmp usr var conf
 mkdir -p usr/bin usr/lib usr/sbin
 mkdir -p var/log
+mkdir -p home/conf
 
 cd "$OUTDIR"
 if [ ! -d "${OUTDIR}/busybox" ]
@@ -91,6 +92,7 @@ cd ${OUTDIR}
 # TODO: Add library dependencies to rootfs
 if [ -d "${FINDER_APP_DIR}/conf" ]; then
     cp -r ${FINDER_APP_DIR}/conf/* ${OUTDIR}/rootfs/conf/ 2>/dev/null || true
+    cp -r ${FINDER_APP_DIR}/conf/* ${OUTDIR}/rootfs/home/conf/ 2>/dev/null || true
 fi
 SYSROOT=$(${CROSS_COMPILE}gcc --print-sysroot)
 find ${SYSROOT} -name "ld-linux-aarch64.so.1" -exec cp -a {} ${OUTDIR}/rootfs/lib/ \;
