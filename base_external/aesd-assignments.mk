@@ -36,4 +36,4 @@ define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(@D)/finder-app/dependencies.sh $(TARGET_DIR)/usr/bin
 endef
 
-$(eval $(generic-package))agdagagdag
+$(eval $(generic-package))
