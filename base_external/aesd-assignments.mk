@@ -15,7 +15,14 @@ AESD_ASSIGNMENTS_SITE_METHOD = git
 AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
+	@echo "=== BUILDING AESD_ASSIGNMENTS ==="
+	@echo "Build directory: $(@D)"
+	@ls -la $(@D)/ || echo "Build directory not found"
+	@ls -la $(@D)/finder-app/ || echo "finder-app directory not found"
+	
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all
+	
+	@echo "=== BUILD COMPLETE ==="
 endef
 
 # TODO add your writer, finder and finder-test utilities/scripts to the installation steps below
@@ -26,6 +33,7 @@ define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(@D)/finder-app/writer $(TARGET_DIR)/usr/bin
 	$(INSTALL) -m 0755 $(@D)/finder-app/finder.sh $(TARGET_DIR)/usr/bin
 	$(INSTALL) -m 0755 $(@D)/finder-app/finder-test.sh $(TARGET_DIR)/usr/bin
+	$(INSTALL) -m 0755 $(@D)/finder-app/dependencies.sh $(TARGET_DIR)/usr/bin
 endef
 
-$(eval $(generic-package))
+$(eval $(generic-package))agdagagdag
